@@ -1,6 +1,8 @@
 package com.soten.androidstudio.j2kb
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -23,5 +25,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+        val test: Button = findViewById(R.id.test_button)
+
+        test.setOnClickListener {
+            val intent = Intent(this@MainActivity, SplashActivity::class.java)
+            startActivity(intent)
+
+        }
     }
+
 }
