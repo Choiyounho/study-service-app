@@ -1,25 +1,32 @@
 package com.soten.androidstudio.j2kb
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.user.UserApiClient
+import com.soten.androidstudio.j2kb.utils.CommonsConstant
 
 class LoginActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         val callback: ((OAuthToken?, Throwable?) -> Unit) = { token, error ->
             if (error != null) {
-                Log.d("TAG", "kakao loing Failed : ", error)
+                Log.e(CommonsConstant.TAG, "kakao login Failed : ", error)
             }
             if (token != null) {
                 startMainActivity()
+                UserApiClient.instance.me { user, _ ->
+                    user?.let {
+                        Log.i(CommonsConstant.TAG, "updateLoginInfo: ${user.id} ${user.kakaoAccount?.email} ${user.kakaoAccount?.profile?.nickname} ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                    }
+                }
             }
         }
 

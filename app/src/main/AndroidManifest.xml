@@ -6,13 +6,12 @@
 
     <application
         android:name=".KakaoApplication"
-        android:allowBackup="true"
         android:icon="@mipmap/ic_j2kb"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_j2kb_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/Theme.J2kb">
+        android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".SplashActivity"
@@ -31,7 +30,6 @@
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
 
-            <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
             <data android:host="oauth"
                 android:scheme="kakaoedcfab96404a215e68d114bc52f4b0a5" />
         </intent-filter>
