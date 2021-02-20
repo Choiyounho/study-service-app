@@ -16,6 +16,19 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val loginBtn = findViewById<ImageView>(R.id.btn_kakao_login)
+        loginBtn.setOnClickListener {
+            LoginClient.instance.run {
+                if (isKakaoTalkLoginAvailable(this@LoginActivity)) {
+                    loginWithKakaoTalk(this@LoginActivity, callback = callback())
+                } else {
+                    loginWithKakaoAccount(this@LoginActivity, callback = callback())
+                }
+            }
+        }
+    }
+
+    private fun callback(): (OAuthToken?, Throwable?) -> Unit {
         val callback: ((OAuthToken?, Throwable?) -> Unit) = { token, error ->
             if (error != null) {
                 Log.e(CommonsConstant.TAG, "kakao login Failed : ", error)
@@ -24,22 +37,15 @@ class LoginActivity : AppCompatActivity() {
                 startMainActivity()
                 UserApiClient.instance.me { user, _ ->
                     user?.let {
-                        Log.i(CommonsConstant.TAG, "updateLoginInfo: ${user.id} ${user.kakaoAccount?.email} ${user.kakaoAccount?.profile?.nickname} ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                        Log.i(
+                            CommonsConstant.TAG,
+                            "updateLoginInfo: ${user.id} ${user.kakaoAccount?.email} ${user.kakaoAccount?.profile?.nickname} ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                        )
                     }
                 }
             }
         }
-
-        val loginBtn = findViewById<ImageView>(R.id.btn_kakao_login)
-        loginBtn.setOnClickListener {
-            LoginClient.instance.run {
-                if (isKakaoTalkLoginAvailable(this@LoginActivity)) {
-                    loginWithKakaoTalk(this@LoginActivity, callback = callback)
-                } else {
-                    loginWithKakaoAccount(this@LoginActivity, callback = callback)
-                }
-            }
-        }
+        return callback
     }
 
     private fun startMainActivity() {
