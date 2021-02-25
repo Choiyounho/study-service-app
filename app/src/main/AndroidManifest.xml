@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_j2kb_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/SplashTheme">
+        android:theme="@style/Theme.J2kb">
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".SplashActivity"
