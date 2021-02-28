@@ -1,6 +1,7 @@
 package com.soten.androidstudio.j2kb.ui.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.kakao.sdk.user.UserApiClient
 import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.medel.user.User
+import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 
 class ProfileFragment : Fragment() {
 
@@ -31,14 +33,16 @@ class ProfileFragment : Fragment() {
         val profile: ImageView = getView()?.findViewById(R.id.image_profile) as ImageView
 
         UserApiClient.instance.me { user, _ ->
-            me = User(user?.kakaoAccount?.profile?.nickname)
+            me = User(user?.kakaoAccount?.profile?.nickname,
+                user?.kakaoAccount?.profile?.thumbnailImageUrl)
+
+            Log.i(TAG, "$me")
 
             nickname.text = user?.kakaoAccount?.profile?.nickname
             Glide.with(this@ProfileFragment)
-                    .load(user?.kakaoAccount?.profile?.thumbnailImageUrl.toString())
+                    .load(user?.kakaoAccount?.profile?.thumbnailImageUrl)
                     .centerCrop()
                     .into(profile)
-
         }
 
     }

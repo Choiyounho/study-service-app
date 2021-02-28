@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.soten.androidstudio.j2kb.ui.mywork.DashboardFragment"
+        android:name="com.soten.androidstudio.j2kb.ui.mywork.MyWorkFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
