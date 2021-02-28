@@ -33,7 +33,7 @@ class ProfileFragment : Fragment() {
         val profile: ImageView = getView()?.findViewById(R.id.image_profile) as ImageView
 
         UserApiClient.instance.me { user, _ ->
-            me = User(user?.kakaoAccount?.profile?.nickname,
+            me = User(user?.id, user?.kakaoAccount?.profile?.nickname,
                 user?.kakaoAccount?.profile?.thumbnailImageUrl)
 
             Log.i(TAG, "$me")
