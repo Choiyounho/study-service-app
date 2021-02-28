@@ -10,6 +10,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.soten.androidstudio.j2kb.utils.CommonsConstant
 
+
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun callback(): (OAuthToken?, Throwable?) -> Unit {
-        val callback: ((OAuthToken?, Throwable?) -> Unit) = { token, error ->
+        return { token, error ->
             if (error != null) {
                 Log.e(CommonsConstant.TAG, "kakao login Failed : ", error)
             }
@@ -42,10 +43,10 @@ class LoginActivity : AppCompatActivity() {
                             "updateLoginInfo: ${user.id} ${user.kakaoAccount?.email} ${user.kakaoAccount?.profile?.nickname} ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
                         )
                     }
+
                 }
             }
         }
-        return callback
     }
 
     private fun startMainActivity() {

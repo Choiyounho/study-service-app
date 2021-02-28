@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb.ui.dashboard
+package com.soten.androidstudio.j2kb.ui.mywork
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.soten.androidstudio.j2kb.R
 
-class DashboardFragment : Fragment() {
+class MyWorkFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var myWorkViewModel: MyWorkViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
+        myWorkViewModel = ViewModelProvider(this).get(MyWorkViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        myWorkViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

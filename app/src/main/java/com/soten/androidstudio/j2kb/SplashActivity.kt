@@ -1,11 +1,8 @@
 package com.soten.androidstudio.j2kb
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
-import com.kakao.sdk.common.util.Utility
+import androidx.appcompat.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +10,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Thread.sleep(1000L)
-
 
         val intent = Intent(this@SplashActivity, LoginActivity::class.java)
         startActivity(intent)
