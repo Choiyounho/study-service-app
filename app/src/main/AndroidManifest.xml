@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_j2kb_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.J2kb">
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".SplashActivity"
@@ -31,7 +31,7 @@
             <category android:name="android.intent.category.BROWSABLE" />
 
             <data android:host="oauth"
-                android:scheme="kakaoedcfab96404a215e68d114bc52f4b0a5" />
+                android:scheme="@string/manifast_kakao_native_key" />
         </intent-filter>
     </activity>
     </application>

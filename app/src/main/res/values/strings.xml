@@ -2,5 +2,5 @@
     <string name="app_name">j2kb</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">MyWork</string>
-    <string name="title_notifications">Me</string>
+    <string name="title_notifications">Profile</string>
 </resources>
