@@ -6,10 +6,7 @@ data class User(
     val id: Long?,
     var nickname: String?,
     var profileImage: String?,
-    var grade: UserRole = UserRole.CUSTOMER,
+    var grade: Role = Role.CUSTOMER,
     val createdTIme: LocalDateTime = LocalDateTime.now(),
     var updatedDate: LocalDateTime = LocalDateTime.now()
-) {
-
-
-}
+)

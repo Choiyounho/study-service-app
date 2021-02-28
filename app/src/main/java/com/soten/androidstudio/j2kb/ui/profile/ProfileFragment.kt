@@ -19,9 +19,9 @@ class ProfileFragment : Fragment() {
     lateinit var me: User
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
@@ -33,16 +33,18 @@ class ProfileFragment : Fragment() {
         val profile: ImageView = getView()?.findViewById(R.id.image_profile) as ImageView
 
         UserApiClient.instance.me { user, _ ->
-            me = User(user?.id, user?.kakaoAccount?.profile?.nickname,
-                user?.kakaoAccount?.profile?.thumbnailImageUrl)
+            me = User(
+                user?.id, user?.kakaoAccount?.profile?.nickname,
+                user?.kakaoAccount?.profile?.thumbnailImageUrl
+            )
 
             Log.i(TAG, "$me")
 
             nickname.text = user?.kakaoAccount?.profile?.nickname
             Glide.with(this@ProfileFragment)
-                    .load(user?.kakaoAccount?.profile?.thumbnailImageUrl)
-                    .centerCrop()
-                    .into(profile)
+                .load(user?.kakaoAccount?.profile?.thumbnailImageUrl)
+                .centerCrop()
+                .into(profile)
         }
 
     }

@@ -15,12 +15,11 @@ class MyWorkFragment : Fragment() {
     private lateinit var myWorkViewModel: MyWorkViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        myWorkViewModel =
-                ViewModelProvider(this).get(MyWorkViewModel::class.java)
+        myWorkViewModel = ViewModelProvider(this).get(MyWorkViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
         myWorkViewModel.text.observe(viewLifecycleOwner, Observer {
