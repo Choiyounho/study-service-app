@@ -1,13 +1,13 @@
-package com.soten.androidstudio.j2kb.ui.home
+package com.soten.androidstudio.j2kb.view.mywork
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class MyWorkViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "홈 프라그먼트"
+        value = "나의 할일"
     }
     val text: LiveData<String> = _text
 }

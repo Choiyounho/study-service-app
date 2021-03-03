@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb.ui.profile
+package com.soten.androidstudio.j2kb.view.profile
 
 import android.os.Bundle
 import android.util.Log
@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val nickname: TextView = getView()?.findViewById(R.id.text_notifications) as TextView
+        val nickname: TextView = getView()?.findViewById(R.id.text_profile_name) as TextView
         val profile: ImageView = getView()?.findViewById(R.id.image_profile) as ImageView
 
         UserApiClient.instance.me { user, _ ->

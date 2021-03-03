@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb.ui.home
+package com.soten.androidstudio.j2kb.view.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

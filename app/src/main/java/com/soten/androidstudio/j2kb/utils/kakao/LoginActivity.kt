@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb
+package com.soten.androidstudio.j2kb.utils.kakao
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
+import com.soten.androidstudio.j2kb.MainActivity
+import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.utils.CommonsConstant
 
 

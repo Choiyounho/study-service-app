@@ -1,7 +1,8 @@
-package com.soten.androidstudio.j2kb
+package com.soten.androidstudio.j2kb.utils.kakao
 
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
+import com.soten.androidstudio.j2kb.R
 
 class KakaoApplication : Application() {
 
