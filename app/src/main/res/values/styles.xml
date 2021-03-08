@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/black</item>
@@ -16,11 +16,11 @@
 
     <style name="TextStyle" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/notionText</item>
     </style>
 
     <style name="TextStyle.Home" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">40sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/notionText</item>
     </style>
 </resources>

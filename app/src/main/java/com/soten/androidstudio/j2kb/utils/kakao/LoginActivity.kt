@@ -19,6 +19,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+//        updateLoginInfo()
+
         val loginBtn = findViewById<ImageView>(R.id.btn_kakao_login)
         loginBtn.setOnClickListener {
             LoginClient.instance.run {
@@ -45,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
                             "updateLoginInfo: ${user.id} ${user.kakaoAccount?.email} ${user.kakaoAccount?.profile?.nickname} ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
                         )
                     }
-
                 }
             }
         }
@@ -53,6 +54,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun startMainActivity() {
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        finish()
     }
+//
+//    private fun updateLoginInfo() {
+//        UserApiClient.instance.me { user, _ ->
+//            if (user != null) {
+//                startMainActivity()
+//            }
+//        }
+//
+//    }
 
 }
