@@ -13,8 +13,6 @@ import com.soten.androidstudio.j2kb.view.home.notice.NoticeFragment
 
 class HomeFragment : Fragment() {
 
-    var lastTimeBackPressed: Long = 0
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,8 +39,6 @@ class HomeFragment : Fragment() {
             fragmentTransaction.replace(R.id.nav_host_fragment, noticeFragment)
             fragmentTransaction.commit()
         }
-
-
     }
 
 }

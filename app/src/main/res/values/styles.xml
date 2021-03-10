@@ -19,6 +19,11 @@
         <item name="android:textColor">@color/notionText</item>
     </style>
 
+    <style name="TextStyle.Notice.Small" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/notionText</item>
+    </style>
+
     <style name="TextStyle.Home" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">40sp</item>
         <item name="android:textColor">@color/notionText</item>

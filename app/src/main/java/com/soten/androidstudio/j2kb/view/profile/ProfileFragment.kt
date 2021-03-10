@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.kakao.sdk.user.UserApiClient
 import com.soten.androidstudio.j2kb.R
+import com.soten.androidstudio.j2kb.model.user.Role
 import com.soten.androidstudio.j2kb.model.user.User
 import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 
@@ -37,7 +38,8 @@ class ProfileFragment : Fragment() {
         UserApiClient.instance.me { user, _ ->
             me = User(
                 user?.id, user?.kakaoAccount?.profile?.nickname,
-                user?.kakaoAccount?.profile?.thumbnailImageUrl
+                user?.kakaoAccount?.profile?.thumbnailImageUrl,
+                grade = Role.ADMIN
             )
 
             Log.i(TAG, "$me")

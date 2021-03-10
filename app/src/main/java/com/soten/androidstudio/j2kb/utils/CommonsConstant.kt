@@ -5,5 +5,4 @@ class CommonsConstant {
     companion object {
         const val TAG = "TAG"
     }
-
 }
