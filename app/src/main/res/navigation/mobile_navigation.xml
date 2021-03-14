@@ -7,19 +7,16 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.soten.androidstudio.j2kb.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:name="com.soten.androidstudio.j2kb.view.home.HomeFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.soten.androidstudio.j2kb.ui.mywork.MyWorkFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_mywork"
+        android:name="com.soten.androidstudio.j2kb.view.mywork.MyWorkFragment"
+        tools:layout="@layout/fragment_my_work" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.soten.androidstudio.j2kb.ui.profile.ProfileFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_profile"
+        android:name="com.soten.androidstudio.j2kb.view.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
 </navigation>
