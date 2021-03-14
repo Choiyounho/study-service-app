@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb
+package com.soten.androidstudio.j2kb.utils.kakao
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
+import com.soten.androidstudio.j2kb.MainActivity
+import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.utils.CommonsConstant
 
 
@@ -16,6 +18,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+//        updateLoginInfo()
 
         val loginBtn = findViewById<ImageView>(R.id.btn_kakao_login)
         loginBtn.setOnClickListener {
@@ -43,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
                             "updateLoginInfo: ${user.id} ${user.kakaoAccount?.email} ${user.kakaoAccount?.profile?.nickname} ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
                         )
                     }
-
                 }
             }
         }
@@ -51,6 +54,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun startMainActivity() {
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        finish()
     }
+//
+//    private fun updateLoginInfo() {
+//        UserApiClient.instance.me { user, _ ->
+//            if (user != null) {
+//                startMainActivity()
+//            }
+//        }
+//
+//    }
 
 }

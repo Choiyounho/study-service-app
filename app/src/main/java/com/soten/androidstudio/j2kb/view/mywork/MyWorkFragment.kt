@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb.ui.mywork
+package com.soten.androidstudio.j2kb.view.mywork
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,7 +20,7 @@ class MyWorkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         myWorkViewModel = ViewModelProvider(this).get(MyWorkViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val root = inflater.inflate(R.layout.fragment_my_work, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
         myWorkViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

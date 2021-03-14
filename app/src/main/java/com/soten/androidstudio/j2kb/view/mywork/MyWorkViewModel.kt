@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb.ui.mywork
+package com.soten.androidstudio.j2kb.view.mywork
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
