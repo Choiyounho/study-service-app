@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.soten.androidstudio.j2kb.model.post.Communicator
 import com.soten.androidstudio.j2kb.utils.BackPressed
 import com.soten.androidstudio.j2kb.view.home.notice.NoticeFragment
@@ -21,6 +22,8 @@ class MainActivity : AppCompatActivity(), BackPressed{
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
+
+        AndroidThreeTen.init(this)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 //
 //        val title = findViewById<EditText>(R.id.notice_post_title)
