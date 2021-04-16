@@ -32,9 +32,6 @@ class NoticeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val noticeList = ArrayList<NoticePost>()
-//        for (i in 0 .. 5) {
-//            noticeList.add(NoticePost(i.toLong(), "$i 번째 제목", "", "$i 윤호"))
-//        }
 
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             val result = bundle.getString("bundleKey")
