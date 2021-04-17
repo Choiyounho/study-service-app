@@ -22,11 +22,7 @@ class LoginActivity : AppCompatActivity() {
         val loginBtn = findViewById<ImageView>(R.id.btn_kakao_login)
         loginBtn.setOnClickListener {
             LoginClient.instance.run {
-                if (isKakaoTalkLoginAvailable(this@LoginActivity)) {
-                    loginWithKakaoTalk(this@LoginActivity, callback = callback())
-                } else {
-                    loginWithKakaoAccount(this@LoginActivity, callback = callback())
-                }
+                loginWithKakaoAccount(this@LoginActivity, callback = callback())
             }
         }
     }
