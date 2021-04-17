@@ -45,10 +45,14 @@ class ProfileFragment : Fragment() {
             Log.i(TAG, "$me")
 
             nickname.text = user?.kakaoAccount?.profile?.nickname
-            Glide.with(this@ProfileFragment)
-                .load(user?.kakaoAccount?.profile?.thumbnailImageUrl)
-                .centerCrop()
-                .into(profile)
+            me.profileImage?.let {
+                Glide.with(this@ProfileFragment)
+                    .load(user?.kakaoAccount?.profile?.thumbnailImageUrl)
+                    .centerCrop()
+                    .into(profile)
+            } ?: run {
+                profile.setImageResource(R.drawable.j2kb)
+            }
         }
 
         logout.setOnClickListener {
@@ -61,7 +65,6 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-
     }
 
 }
