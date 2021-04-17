@@ -1,6 +1,5 @@
 package com.soten.androidstudio.j2kb.view.home.notice.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.model.post.NoticePost
-import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 
 class NoticeAdapter(
     val noticePostList: ArrayList<NoticePost>
@@ -20,10 +18,6 @@ class NoticeAdapter(
         val itemWriteDate: TextView = itemView.findViewById(R.id.write_date)
         val itemWriter: TextView = itemView.findViewById(R.id.writer)
 
-        init {
-            itemView.setOnClickListener {
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

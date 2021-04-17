@@ -19,16 +19,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-//        updateLoginInfo()
-
         val loginBtn = findViewById<ImageView>(R.id.btn_kakao_login)
         loginBtn.setOnClickListener {
             LoginClient.instance.run {
-                if (isKakaoTalkLoginAvailable(this@LoginActivity)) {
-                    loginWithKakaoTalk(this@LoginActivity, callback = callback())
-                } else {
-                    loginWithKakaoAccount(this@LoginActivity, callback = callback())
-                }
+                loginWithKakaoAccount(this@LoginActivity, callback = callback())
             }
         }
     }
@@ -56,14 +50,5 @@ class LoginActivity : AppCompatActivity() {
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         finish()
     }
-//
-//    private fun updateLoginInfo() {
-//        UserApiClient.instance.me { user, _ ->
-//            if (user != null) {
-//                startMainActivity()
-//            }
-//        }
-//
-//    }
 
 }
