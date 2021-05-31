@@ -9,7 +9,7 @@ import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.model.post.NoticePost
 
 class NoticeAdapter(
-    val noticePostList: ArrayList<NoticePost>
+    private val noticePostList: ArrayList<NoticePost>
 ) : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

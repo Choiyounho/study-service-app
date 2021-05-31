@@ -12,10 +12,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.kakao.sdk.user.UserApiClient
 import com.soten.androidstudio.j2kb.utils.BackPressed
 import com.soten.androidstudio.j2kb.utils.CommonsConstant
-import com.soten.androidstudio.j2kb.utils.kakao.LoginActivity
 
 class MainActivity : AppCompatActivity(), BackPressed{
 
@@ -26,7 +24,6 @@ class MainActivity : AppCompatActivity(), BackPressed{
 
         AndroidThreeTen.init(this)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
 
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
@@ -53,14 +50,7 @@ class MainActivity : AppCompatActivity(), BackPressed{
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_logout -> {
-                UserApiClient.instance.logout { error ->
-                    if (error != null) {
-                        Log.e(CommonsConstant.TAG, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
-                    } else {
-                        Log.i(CommonsConstant.TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
-                        startActivity(Intent(this, LoginActivity::class.java))
-                    }
-                }
+
                 true
             }
             else -> super.onOptionsItemSelected(item)

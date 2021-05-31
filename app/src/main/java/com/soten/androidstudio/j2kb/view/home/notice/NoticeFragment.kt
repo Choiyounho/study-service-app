@@ -19,7 +19,6 @@ import com.soten.androidstudio.j2kb.view.home.notice.post.NoticePostFragment
 
 class NoticeFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
