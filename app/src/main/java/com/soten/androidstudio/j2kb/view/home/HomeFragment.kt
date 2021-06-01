@@ -29,7 +29,6 @@ class HomeFragment : Fragment() {
 
 
         notice?.setOnClickListener {
-
             Log.d("TAG", "test")
             val fragmentManager = parentFragmentManager
 

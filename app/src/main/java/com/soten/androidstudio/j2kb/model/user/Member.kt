@@ -2,7 +2,7 @@ package com.soten.androidstudio.j2kb.model.user
 
 import org.threeten.bp.LocalDateTime
 
-data class User(
+data class Member(
     val id: Long?,
     var nickname: String?,
     var profileImage: String?,

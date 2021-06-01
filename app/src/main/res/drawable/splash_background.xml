@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item android:drawable="@color/black" />
+
     <item>
         <bitmap
-            android:src="@drawable/j2kb"
-            android:gravity="center" />
+            android:gravity="center"
+            android:src="@drawable/j2kb" />
     </item>
 </layer-list>
