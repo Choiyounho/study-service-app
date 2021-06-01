@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb.view.profile
+package com.soten.androidstudio.j2kb.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
