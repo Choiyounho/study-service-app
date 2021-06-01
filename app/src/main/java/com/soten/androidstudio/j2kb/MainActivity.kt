@@ -1,8 +1,6 @@
 package com.soten.androidstudio.j2kb
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -11,16 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.soten.androidstudio.j2kb.utils.BackPressed
-import com.soten.androidstudio.j2kb.utils.CommonsConstant
 
 class MainActivity : AppCompatActivity(), BackPressed{
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
+
+        auth = Firebase.auth
 
         AndroidThreeTen.init(this)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)

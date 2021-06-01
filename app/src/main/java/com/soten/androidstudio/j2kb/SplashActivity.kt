@@ -13,12 +13,10 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
 
         auth = Firebase.auth
 
         Thread.sleep(1000L)
-
     }
 
     override fun onStart() {
@@ -26,9 +24,11 @@ class SplashActivity : AppCompatActivity() {
         auth.currentUser?.let {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         } ?: run {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

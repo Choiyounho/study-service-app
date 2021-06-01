@@ -48,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "signInWithCredential:success")
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
