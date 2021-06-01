@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb.view.home.notice.adapter
+package com.soten.androidstudio.j2kb.ui.home.notice.adapter
 
 import android.view.LayoutInflater
 import android.view.View

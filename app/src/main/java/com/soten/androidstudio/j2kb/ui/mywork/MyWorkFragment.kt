@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb.view.mywork
+package com.soten.androidstudio.j2kb.ui.mywork
 
 import android.os.Bundle
 import android.view.LayoutInflater
