@@ -1,4 +1,4 @@
-package com.soten.androidstudio.j2kb.view.home
+package com.soten.androidstudio.j2kb.ui.home
 
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.soten.androidstudio.j2kb.R
-import com.soten.androidstudio.j2kb.view.home.notice.NoticeFragment
+import com.soten.androidstudio.j2kb.ui.home.notice.NoticeFragment
 
 class HomeFragment : Fragment() {
 

@@ -1,12 +1,11 @@
 package com.soten.androidstudio.j2kb.model.user
 
-import org.threeten.bp.LocalDateTime
+import com.soten.androidstudio.j2kb.model.user.Role.NORMAL
 
 data class Member(
     val id: Long?,
     var nickname: String?,
     var profileImage: String?,
-    var grade: Role = Role.CUSTOMER,
-    val createdTIme: LocalDateTime = LocalDateTime.now(),
-    var updatedDate: LocalDateTime = LocalDateTime.now()
+    var grade: Role = NORMAL,
+    val createdTIme: String,
 )
