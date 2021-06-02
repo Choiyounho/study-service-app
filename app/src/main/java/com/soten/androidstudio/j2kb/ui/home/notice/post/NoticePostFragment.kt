@@ -62,11 +62,6 @@ class NoticePostFragment : Fragment() {
                     .setValue(noticeDescription?.text.toString())
             }
 
-
-//            Log.d("title", noticeTitle?.text.toString())
-//            val result = noticeTitle?.text.toString()
-//            setFragmentResult("requestKey", bundleOf("bundleKey" to result))
-
             val noticeFragment = NoticeFragment()
 
             val fragmentManager = parentFragmentManager
