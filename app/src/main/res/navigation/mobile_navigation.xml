@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.soten.androidstudio.j2kb.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_noticeFragment4"
+            app:destination="@id/noticeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_mywork"
@@ -19,4 +23,8 @@
         android:id="@+id/navigation_profile"
         android:name="com.soten.androidstudio.j2kb.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/noticeFragment"
+        android:name="com.soten.androidstudio.j2kb.ui.home.notice.NoticeFragment"
+        android:label="NoticeFragment" />
 </navigation>

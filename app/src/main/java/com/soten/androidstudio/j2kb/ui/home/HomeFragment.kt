@@ -1,41 +1,24 @@
 package com.soten.androidstudio.j2kb.ui.home
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.soten.androidstudio.j2kb.R
-import com.soten.androidstudio.j2kb.ui.home.notice.NoticeFragment
 
-class HomeFragment : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val notice = getView()?.findViewById<TextView>(R.id.tv_notice)
+        initNoticeTextView()
+    }
 
-        val noticeFragment = NoticeFragment()
-
-
-        notice?.setOnClickListener {
-            Log.d("TAG", "test")
-            val fragmentManager = parentFragmentManager
-
-            val fragmentTransaction = fragmentManager.beginTransaction()
-
-            fragmentTransaction.replace(R.id.nav_host_fragment, noticeFragment)
-            fragmentTransaction.commit()
+    private fun initNoticeTextView() {
+        val noticeTextView = view?.findViewById<TextView>(R.id.tv_notice)
+        noticeTextView?.setOnClickListener {
+            findNavController().navigate(R.id.noticeFragment, null)
         }
     }
 
