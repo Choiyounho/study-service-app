@@ -8,4 +8,6 @@
     <string name="noticePostTitleHint">제목을 입력해 주세요.</string>
     <string name="noticeDescriptionHint">내용을 입력해주세요</string>
     <string name="postNotice">등록</string>
+    <string name="modification">수정</string>
+    <string name="delete">삭제</string>
 </resources>

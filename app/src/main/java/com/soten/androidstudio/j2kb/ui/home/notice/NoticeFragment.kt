@@ -21,13 +21,13 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.R
-import com.soten.androidstudio.j2kb.model.post.NoticePost
+import com.soten.androidstudio.j2kb.model.post.Notice
 import com.soten.androidstudio.j2kb.model.user.Role
 import com.soten.androidstudio.j2kb.ui.home.notice.adapter.NoticeAdapter
 import com.soten.androidstudio.j2kb.ui.home.notice.post.NoticePostActivity
 import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_NOTICE
-import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_NOTICE_GRADE
+import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USER_GRADE
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS
 
 class NoticeFragment : Fragment(R.layout.fragment_notice) {
@@ -40,11 +40,11 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
     private lateinit var noticeAdapter: NoticeAdapter
     private lateinit var noticeDb: DatabaseReference
 
-    private val noticeList = mutableListOf<NoticePost>()
+    private val noticeList = mutableListOf<Notice>()
 
     private val listener = object : ChildEventListener {
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-            val post = snapshot.getValue(NoticePost::class.java)
+            val post = snapshot.getValue(Notice::class.java)
             post ?: return
 
             noticeList.add(post)
@@ -77,7 +77,14 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
 
     private fun initRecyclerView() {
         val recyclerView = view?.findViewById<RecyclerView>(R.id.notice_container)
-        noticeAdapter = NoticeAdapter()
+        noticeAdapter = NoticeAdapter(onItemClicked = { noticePost ->
+            context?.let {
+                val intent = Intent(it, NoticeReadActivity::class.java)
+                intent.putExtra("title", noticePost.title)
+                intent.putExtra("description", noticePost.description)
+                startActivity(intent)
+            }
+        })
 
         recyclerView?.layoutManager = LinearLayoutManager(context)
         recyclerView?.adapter = noticeAdapter
@@ -108,7 +115,7 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
         result: DocumentSnapshot?,
         it: Context
     ): Boolean {
-        val grade = result?.get(DB_NOTICE_GRADE).toString()
+        val grade = result?.get(DB_USER_GRADE).toString()
         if (grade == Role.ADMIN.toString() || grade == Role.MANAGER.toString()) {
             val intent = Intent(it, NoticePostActivity::class.java)
             startActivity(intent)

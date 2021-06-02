@@ -10,7 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.R
-import com.soten.androidstudio.j2kb.model.post.NoticePost
+import com.soten.androidstudio.j2kb.model.post.Notice
 import com.soten.androidstudio.j2kb.utils.DBKey
 
 class NoticePostActivity : AppCompatActivity() {
@@ -35,7 +35,7 @@ class NoticePostActivity : AppCompatActivity() {
 
         writeButton.setOnClickListener {
             if (auth.currentUser != null) {
-                val post = NoticePost(
+                val post = Notice(
                     id = auth.currentUser?.uid,
                     title = getTitleString(),
                     description = getDescriptionString(),
