@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/notion"
+    tools:context=".ui.home.notice.post.NoticePostActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -15,19 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <Button
-        android:id="@+id/notice_post_write"
+        android:id="@+id/addNoticeButton"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="271dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:text="등록"
         android:backgroundTint="#1A1D22"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/postNotice"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/notice_post_title"
@@ -37,13 +37,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:hint="제목을 입력해 주세요."
+        android:inputType="text"
+        android:hint="@string/noticePostTitleHint"
         android:textColorHint="@color/notionText"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/backButton" />
 
     <EditText
         android:id="@+id/notice_post_description"
@@ -54,14 +54,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:hint="내용을 입력해주세요"
-        android:textColorHint="@color/notionText"
+        android:gravity="top"
+        android:hint="@string/noticeDescriptionHint"
         android:scrollbars="vertical"
+        android:textColorHint="@color/notionText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notice_post_title" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

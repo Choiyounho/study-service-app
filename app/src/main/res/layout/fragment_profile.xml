@@ -15,7 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <ImageView
             android:id="@+id/image_profile"
             android:layout_width="100dp"
@@ -23,6 +22,8 @@
             android:layout_marginStart="16dp"
             android:foregroundGravity="center"
             android:padding="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/j2kb"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,12 +42,12 @@
             android:id="@+id/btn_kakao_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그아웃"
-            android:backgroundTint="@color/black"
-            android:textColor="@color/white"
             android:layout_marginTop="26dp"
             android:layout_marginEnd="26dp"
             android:layout_marginBottom="26dp"
+            android:backgroundTint="@color/black"
+            android:text="로그아웃"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
