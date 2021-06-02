@@ -6,17 +6,15 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.soten.androidstudio.j2kb.utils.BackPressed
 import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 
-class MainActivity : AppCompatActivity(), BackPressed {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
@@ -31,7 +29,6 @@ class MainActivity : AppCompatActivity(), BackPressed {
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -48,18 +45,6 @@ class MainActivity : AppCompatActivity(), BackPressed {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun backPress() {
-        super.onBackPressed()
-
-        val fragmentList: List<Fragment> = supportFragmentManager.fragments
-        for (fragment in fragmentList) {
-            if (fragment is BackPressed) {
-                (fragment as BackPressed).backPress()
-                return
-            }
         }
     }
 
