@@ -130,7 +130,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun addUsersDbToMember(member: Member) {
-        store.collection("Users")
+        store.collection(DB_USERS)
             .document(auth.currentUser?.uid.orEmpty())
             .set(member)
             .addOnSuccessListener {
