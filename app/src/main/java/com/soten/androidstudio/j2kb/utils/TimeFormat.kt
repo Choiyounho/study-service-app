@@ -16,4 +16,5 @@ class TimeFormat {
             return SimpleDateFormat("yy.MM.dd.HH:mm", Locale.KOREA).format(currentDateTime)
         }
     }
+
 }

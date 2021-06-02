@@ -19,8 +19,8 @@ import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.model.user.Member
 import com.soten.androidstudio.j2kb.model.user.Role
 import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
+import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS
 import com.soten.androidstudio.j2kb.utils.TimeFormat
-import java.text.SimpleDateFormat
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
@@ -103,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun addUserInfoToFirestore(member: Member) {
-        store.collection("Users")
+        store.collection(DB_USERS)
             .get()
             .addOnSuccessListener { result ->
                 if (isExistMember(result)) {
@@ -130,7 +130,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun addUsersDbToMember(member: Member) {
-        store.collection("Users")
+        store.collection(DB_USERS)
             .document(auth.currentUser?.uid.orEmpty())
             .set(member)
             .addOnSuccessListener {
