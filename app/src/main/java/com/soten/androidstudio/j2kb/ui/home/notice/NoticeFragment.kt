@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +16,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.model.post.NoticePost
-import com.soten.androidstudio.j2kb.ui.home.HomeFragment
 import com.soten.androidstudio.j2kb.ui.home.notice.adapter.NoticeAdapter
 import com.soten.androidstudio.j2kb.ui.home.notice.post.NoticePostActivity
 import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
@@ -81,15 +79,5 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val homeFragment = HomeFragment()
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, homeFragment)
-                .commit()
-        }
-    }
 
 }
