@@ -1,6 +1,8 @@
 package com.soten.androidstudio.j2kb.ui.home.notice
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.addCallback
@@ -17,7 +19,8 @@ import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.model.post.NoticePost
 import com.soten.androidstudio.j2kb.ui.home.HomeFragment
 import com.soten.androidstudio.j2kb.ui.home.notice.adapter.NoticeAdapter
-import com.soten.androidstudio.j2kb.ui.home.notice.post.NoticePostFragment
+import com.soten.androidstudio.j2kb.ui.home.notice.post.NoticePostActivity
+import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_NOTICE
 
 class NoticeFragment : Fragment(R.layout.fragment_notice) {
@@ -69,14 +72,12 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
     }
 
     private fun initWriteButton() {
-        val noticePostFragment = NoticePostFragment()
-        view?.findViewById<ImageView>(R.id.writeButton)?.setOnClickListener {
-            val fragmentManager = parentFragmentManager
-
-            val fragmentTransaction = fragmentManager.beginTransaction()
-
-            fragmentTransaction.replace(R.id.nav_host_fragment, noticePostFragment)
-            fragmentTransaction.commit()
+        view?.findViewById<ImageView>(R.id.writeButtonFragment)?.setOnClickListener {
+            context?.let {
+                Log.d(TAG, "노티스 포스트 ")
+                val intent = Intent(it, NoticePostActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

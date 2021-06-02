@@ -5,4 +5,7 @@
     <string name="title_profile">Profile</string>
     <string name="home">Home</string>
     <string name="notice">공지사항</string>
+    <string name="noticePostTitleHint">제목을 입력해 주세요.</string>
+    <string name="noticeDescriptionHint">내용을 입력해주세요</string>
+    <string name="postNotice">등록</string>
 </resources>
