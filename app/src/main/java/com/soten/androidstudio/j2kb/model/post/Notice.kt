@@ -2,7 +2,7 @@ package com.soten.androidstudio.j2kb.model.post
 
 import com.soten.androidstudio.j2kb.utils.TimeFormat
 
-data class NoticePost(
+data class Notice(
     val id: String?,
     var title: String,
     var description: String,

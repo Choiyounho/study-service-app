@@ -15,7 +15,6 @@
         android:ellipsize="end"
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@id/createdTimeForNoticeTextView"
-        app:layout_constraintEnd_toStartOf="@id/noticeMenuImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="글 제목" />
@@ -40,13 +39,4 @@
         app:layout_constraintStart_toEndOf="@id/createdTimeForNoticeTextView"
         app:layout_constraintTop_toTopOf="@id/createdTimeForNoticeTextView"
         tools:text="작성자" />
-
-    <ImageView
-        android:id="@+id/noticeMenuImageView"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_item_select"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
