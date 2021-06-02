@@ -25,9 +25,11 @@ class SplashActivity : AppCompatActivity() {
         super.onStart()
         auth.currentUser?.let {
             val intent = Intent(this, MainActivity::class.java)
+            Log.d(CommonsConstant.TAG, "유저 있음")
             startActivity(intent)
             finish()
         } ?: run {
+            Log.d(CommonsConstant.TAG, "유저 없음")
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
