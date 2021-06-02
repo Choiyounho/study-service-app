@@ -15,6 +15,11 @@ class TimeFormat {
             val currentDateTime = Calendar.getInstance().time
             return SimpleDateFormat("yy.MM.dd.HH:mm", Locale.KOREA).format(currentDateTime)
         }
+
+        fun currentTime(): Long {
+            val currentDateTime = Calendar.getInstance().time
+            return SimpleDateFormat("yyMMddHH", Locale.KOREA).format(currentDateTime).toLong()
+        }
     }
 
 }

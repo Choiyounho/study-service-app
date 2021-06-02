@@ -13,12 +13,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         initNoticeTextView()
+        initCommunityTextView()
     }
 
     private fun initNoticeTextView() {
-        val noticeTextView = view?.findViewById<TextView>(R.id.tv_notice)
+        val noticeTextView = view?.findViewById<TextView>(R.id.noticeTextView)
         noticeTextView?.setOnClickListener {
             findNavController().navigate(R.id.noticeFragment, null)
+        }
+    }
+
+    private fun initCommunityTextView() {
+        val communityTextView = view?.findViewById<TextView>(R.id.myGoalTextView)
+        communityTextView?.setOnClickListener {
+            findNavController().navigate(R.id.weekGoalFragment, null)
         }
     }
 
