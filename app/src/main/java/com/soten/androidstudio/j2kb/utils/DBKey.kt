@@ -9,6 +9,6 @@ class DBKey {
 
         const val DB_NOTICE = "Notice"
         const val DB_NOTICE_TITLE = "noticeTitle"
-        const val DB_DESCRIPTION_TITLE = "noticeDescription"
+        const val DB_NOTICE_DESCRIPTION = "noticeDescription"
     }
 }

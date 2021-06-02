@@ -19,6 +19,7 @@ import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.model.user.Member
 import com.soten.androidstudio.j2kb.model.user.Role
 import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
+import com.soten.androidstudio.j2kb.utils.TimeFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -97,13 +98,8 @@ class LoginActivity : AppCompatActivity() {
             displayName,
             "",
             Role.NORMAL,
-            createdTime()
+            TimeFormat.createdTimeForId()
         )
-    }
-
-    private fun createdTime(): String {
-        val currentDateTime = Calendar.getInstance().time
-        return SimpleDateFormat("yyMMddHHmmss", Locale.KOREA).format(currentDateTime)
     }
 
     private fun addUserInfoToFirestore(member: Member) {
