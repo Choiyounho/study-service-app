@@ -1,6 +1,7 @@
 package com.soten.androidstudio.j2kb
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -10,7 +11,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.utils.BackPressed
+import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 
 class MainActivity : AppCompatActivity(), BackPressed {
 
@@ -19,6 +23,8 @@ class MainActivity : AppCompatActivity(), BackPressed {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        auth = Firebase.auth
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
@@ -36,6 +42,7 @@ class MainActivity : AppCompatActivity(), BackPressed {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_logout -> {
+                Log.d(TAG, "로그아웃")
                 auth.signOut()
                 finish()
                 true

@@ -125,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
     private fun isExistMember(result: QuerySnapshot): Boolean {
         for (document in result) {
             Log.d(TAG, "${document.id} => ${document.data}")
-            if (document.get("id") == auth.currentUser?.uid.orEmpty()) {
+            if (document.get(auth.currentUser?.uid.orEmpty()).toString() == auth.currentUser?.uid.orEmpty()) {
                 startMainActivity()
                 return true
             }
@@ -135,7 +135,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun addUsersDbToMember(member: Member) {
         store.collection("Users")
-            .add(member)
+            .document(auth.currentUser?.uid.orEmpty())
+            .set(member)
             .addOnSuccessListener {
                 Log.d(TAG, "유저 추가 성공")
             }.addOnFailureListener {
