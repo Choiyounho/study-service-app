@@ -8,24 +8,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.soten.androidstudio.j2kb.R
-import com.soten.androidstudio.j2kb.model.post.NoticePost
+import com.soten.androidstudio.j2kb.model.post.Notice
 
-class NoticeAdapter : ListAdapter<NoticePost, NoticeAdapter.ViewHolder>(diffUtil) {
+class NoticeAdapter(val onItemClicked: (Notice) -> Unit) : ListAdapter<Notice, NoticeAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(noticePost: NoticePost) {
+        fun bind(notice: Notice) {
             val title = view.findViewById<TextView>(R.id.titleTextView)
             val time = view.findViewById<TextView>(R.id.createdTimeForNoticeTextView)
             val name = view.findViewById<TextView>(R.id.writerNameTextView)
 
-            title.text = noticePost.title
-            time.text = noticePost.createdTime
-            name.text = noticePost.nickname
+            title.text = notice.title
+            time.text = notice.createdTime
+            name.text = notice.nickname
 
-//            view.rootView.setOnClickListener {
-//                onItemClicked(noticePost)
-//            }
+            view.rootView.setOnClickListener {
+                onItemClicked(notice)
+            }
         }
     }
 
@@ -39,11 +39,11 @@ class NoticeAdapter : ListAdapter<NoticePost, NoticeAdapter.ViewHolder>(diffUtil
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<NoticePost>() {
-            override fun areContentsTheSame(oldItem: NoticePost, newItem: NoticePost) =
+        val diffUtil = object : DiffUtil.ItemCallback<Notice>() {
+            override fun areContentsTheSame(oldItem: Notice, newItem: Notice) =
                 oldItem.createdTime == newItem.createdTime
 
-            override fun areItemsTheSame(oldItem: NoticePost, newItem: NoticePost) =
+            override fun areItemsTheSame(oldItem: Notice, newItem: Notice) =
                 oldItem == newItem
         }
     }

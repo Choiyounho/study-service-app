@@ -10,6 +10,6 @@ class DBKey {
         const val DB_NOTICE = "Notice"
         const val DB_NOTICE_TITLE = "noticeTitle"
         const val DB_NOTICE_DESCRIPTION = "noticeDescription"
-        const val DB_NOTICE_GRADE = "grade"
+        const val DB_USER_GRADE = "grade"
     }
 }
