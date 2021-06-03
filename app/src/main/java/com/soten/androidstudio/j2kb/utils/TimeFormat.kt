@@ -6,6 +6,7 @@ import java.util.*
 class TimeFormat {
 
     companion object {
+
         fun createdTimeForId(): String {
             val currentDateTime = Calendar.getInstance().time
             return SimpleDateFormat("yyMMddHHmmss", Locale.KOREA).format(currentDateTime)
@@ -19,6 +20,11 @@ class TimeFormat {
         fun currentTime(): Long {
             val currentDateTime = Calendar.getInstance().time
             return SimpleDateFormat("yyMMddHH", Locale.KOREA).format(currentDateTime).toLong()
+        }
+
+        fun sendTime(): String {
+            val currentDateTime = Calendar.getInstance().time
+            return SimpleDateFormat("HH:mm", Locale.KOREA).format(currentDateTime).toString()
         }
     }
 
