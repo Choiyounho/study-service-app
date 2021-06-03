@@ -11,7 +11,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.J2kb">
-        <activity android:name=".ui.home.qna.QnAActivity"></activity>
+        <activity android:name=".ui.home.qna.QnaActivity"></activity>
+        <activity android:name=".ui.home.qna.QnAActivity" />
         <activity android:name=".ui.home.goal.GoalActivity" />
         <activity android:name=".ui.home.notice.NoticeReadActivity" />
         <activity android:name=".ui.home.notice.post.NoticePostActivity" />
