@@ -27,6 +27,8 @@ import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_GOAL
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS_NAME
+import com.soten.androidstudio.j2kb.utils.GoalWriteTerms
+import java.util.*
 
 class GoalActivity : AppCompatActivity() {
 
@@ -80,6 +82,11 @@ class GoalActivity : AppCompatActivity() {
         var secondGoal = ""
 
         addCardAdapter = AddCardAdapter(onItemClicked = {
+            if (!GoalWriteTerms.terms()) {
+                Toast.makeText(this, "목표 설정 기간이 아닙니다", Toast.LENGTH_SHORT).show()
+                return@AddCardAdapter
+            }
+
             store.collection(DB_USERS)
                 .document(auth.currentUser?.uid.orEmpty())
                 .get()
