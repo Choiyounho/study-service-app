@@ -22,9 +22,11 @@ import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.model.goal.GoalCard
 import com.soten.androidstudio.j2kb.ui.home.goal.adapter.AddCardAdapter
 import com.soten.androidstudio.j2kb.ui.home.goal.adapter.GoalCardAdapter
+import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.INTENT_WEEK
 import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
+import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_GOAL
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS
-import com.soten.androidstudio.j2kb.utils.TimeFormat
+import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS_NAME
 
 class GoalActivity : AppCompatActivity() {
 
@@ -68,18 +70,9 @@ class GoalActivity : AppCompatActivity() {
     }
 
     private fun initGoalDb() {
-        val week = intent.getIntExtra("week", 0)
-        if (week == 11) {
-            goalDb = Firebase.database.reference.child("11")
-        }
-        if (week == 12) {
-            goalDb = Firebase.database.reference.child("12")
-        }
-        if (week == 13) {
-            goalDb = Firebase.database.reference.child("13")
-        }
+        val week = intent.getIntExtra(INTENT_WEEK, 0)
+        goalDb = Firebase.database.reference.child(DB_GOAL).child(week.toString())
     }
-
 
     private fun initAddAdapter() {
         var name = ""
@@ -87,34 +80,34 @@ class GoalActivity : AppCompatActivity() {
         var secondGoal = ""
 
         addCardAdapter = AddCardAdapter(onItemClicked = {
-            val dialogView = View.inflate(this, R.layout.dialog, null)
-
             store.collection(DB_USERS)
                 .document(auth.currentUser?.uid.orEmpty())
                 .get()
                 .addOnSuccessListener {
-                    name = it["nickname"].toString()
+                    name = it[DB_USERS_NAME].toString()
                     Log.d(TAG, "name $name")
                 }
 
+            val dialogView = View.inflate(this, R.layout.dialog, null)
             val dialog = AlertDialog.Builder(this)
 
-            dialog.setTitle("제목")
+            dialog.setTitle(DIALOG_TITLE)
                 .setView(dialogView)
                 .setPositiveButton(
-                    "입력"
+                    DIALOG_POSITIVE
                 ) { _, _ ->
                     firstGoal = dialogView.findViewById<EditText>(R.id.f).text.toString()
                     secondGoal = dialogView.findViewById<EditText>(R.id.s).text.toString()
                     val card = GoalCard(
-                        id = TimeFormat.createdTimeForId(),
+                        id = auth.currentUser?.uid.orEmpty(),
                         firstGoal = firstGoal,
                         secondGoal = secondGoal,
                         name = name
                     )
-                    goalDb.child(TimeFormat.createdTimeForId())
+                    goalDb.child(auth.currentUser?.uid.orEmpty())
                         .setValue(card)
-                }.setNegativeButton("취소") { _, _ -> }.show()
+                    Toast.makeText(this, TOAST_MESSAGE, Toast.LENGTH_SHORT).show()
+                }.setNegativeButton(DIALOG_NEGATIVE) { _, _ -> }.show()
         })
     }
 
@@ -123,11 +116,22 @@ class GoalActivity : AppCompatActivity() {
         cardList.clear()
 
         goalCardAdapter = GoalCardAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.stackFromEnd= true
+        recyclerView.layoutManager = layoutManager
         concatAdapter = ConcatAdapter(goalCardAdapter, addCardAdapter)
         recyclerView.adapter = concatAdapter
 
         goalDb.addChildEventListener(listener)
+    }
+
+    companion object {
+        private const val DIALOG_TITLE = "주간 목표"
+        private const val DIALOG_POSITIVE = "목표 추가"
+        private const val DIALOG_NEGATIVE = "취소"
+
+        private const val TOAST_MESSAGE = "등록 완료"
     }
 
 }

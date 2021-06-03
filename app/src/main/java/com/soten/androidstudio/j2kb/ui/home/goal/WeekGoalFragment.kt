@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.soten.androidstudio.j2kb.R
+import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.INTENT_WEEK
 import com.soten.androidstudio.j2kb.utils.TimeFormat
 
 class WeekGoalFragment : Fragment(R.layout.fragment_week_goal) {
@@ -51,7 +52,7 @@ class WeekGoalFragment : Fragment(R.layout.fragment_week_goal) {
 
     private fun startGoalActivity(weekTh: Int) {
         val intent = Intent(context, GoalActivity::class.java)
-        intent.putExtra("week", weekTh)
+        intent.putExtra(INTENT_WEEK, weekTh)
         startActivity(intent)
     }
 
