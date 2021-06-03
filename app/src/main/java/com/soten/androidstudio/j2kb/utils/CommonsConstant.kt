@@ -4,5 +4,6 @@ class CommonsConstant {
 
     companion object {
         const val TAG = "TAG"
+        const val INTENT_WEEK = "week"
     }
 }

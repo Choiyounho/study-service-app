@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_navigation_home_to_noticeFragment4"
             app:destination="@id/noticeFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_weekGoalFragment"
+            app:destination="@id/weekGoalFragment" />
     </fragment>
 
     <fragment
@@ -27,4 +30,8 @@
         android:id="@+id/noticeFragment"
         android:name="com.soten.androidstudio.j2kb.ui.home.notice.NoticeFragment"
         android:label="NoticeFragment" />
+    <fragment
+        android:id="@+id/weekGoalFragment"
+        android:name="com.soten.androidstudio.j2kb.ui.home.goal.WeekGoalFragment"
+        android:label="WeekGoalFragment" />
 </navigation>
