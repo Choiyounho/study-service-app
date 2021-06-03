@@ -1,5 +1,6 @@
 package com.soten.androidstudio.j2kb.ui.home.goal
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -22,7 +23,7 @@ class WeekGoalFragment : Fragment(R.layout.fragment_week_goal) {
 
     private fun initElevenTextView(eleven: TextView) {
         eleven.setOnClickListener {
-            Toast.makeText(context, "구현해야하는 기능", Toast.LENGTH_SHORT).show()
+            startGoalActivity(11)
         }
     }
 
@@ -30,6 +31,7 @@ class WeekGoalFragment : Fragment(R.layout.fragment_week_goal) {
         twelve.setOnClickListener {
             if (TimeFormat.currentTime() >= 21061212) {
                 Toast.makeText(context, "열람 가능", Toast.LENGTH_SHORT).show()
+                startGoalActivity(12)
                 return@setOnClickListener
             }
             Toast.makeText(context, "열람 가능 기간이 아닙니다", Toast.LENGTH_SHORT).show()
@@ -40,10 +42,17 @@ class WeekGoalFragment : Fragment(R.layout.fragment_week_goal) {
         thirteenth.setOnClickListener {
             if (TimeFormat.currentTime() >= 21061912) {
                 Toast.makeText(context, "열람 가능", Toast.LENGTH_SHORT).show()
+                startGoalActivity(13)
                 return@setOnClickListener
             }
             Toast.makeText(context, "열람 가능 기간이 아닙니다", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun startGoalActivity(weekTh: Int) {
+        val intent = Intent(context, GoalActivity::class.java)
+        intent.putExtra("week", weekTh)
+        startActivity(intent)
     }
 
 }

@@ -15,7 +15,7 @@ class NoticeAdapter(val onItemClicked: (Notice) -> Unit) : ListAdapter<Notice, N
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(notice: Notice) {
-            val title = view.findViewById<TextView>(R.id.titleTextView)
+            val title = view.findViewById<TextView>(R.id.noticeTitleTextView)
             val time = view.findViewById<TextView>(R.id.createdTimeForNoticeTextView)
             val name = view.findViewById<TextView>(R.id.writerNameTextView)
 
