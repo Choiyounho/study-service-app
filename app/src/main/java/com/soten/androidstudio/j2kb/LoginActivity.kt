@@ -96,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
         return Member(
             auth.currentUser!!.uid,
             displayName,
-            "",
+            "https://picsum.photos/100/100",
             Role.NORMAL,
             TimeFormat.createdTimeForId()
         )
@@ -104,40 +104,25 @@ class LoginActivity : AppCompatActivity() {
 
     private fun addUserInfoToFirestore(member: Member) {
         store.collection(DB_USERS)
+            .document(auth.currentUser?.uid.orEmpty())
             .get()
-            .addOnSuccessListener { result ->
-                if (isExistMember(result)) {
-                    return@addOnSuccessListener
-                } else {
-                    addUsersDbToMember(member)
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
                     startMainActivity()
+                    return@addOnSuccessListener
                 }
+                addUsersDbToMember(member)
+                startMainActivity()
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents.", exception)
             }
     }
 
-    private fun isExistMember(result: QuerySnapshot): Boolean {
-        for (document in result) {
-            Log.d(TAG, "${document.id} => ${document.data}")
-            if (document.get(auth.currentUser?.uid.orEmpty()).toString() == auth.currentUser?.uid.orEmpty()) {
-                startMainActivity()
-                return true
-            }
-        }
-        return false
-    }
-
     private fun addUsersDbToMember(member: Member) {
         store.collection(DB_USERS)
             .document(auth.currentUser?.uid.orEmpty())
             .set(member)
-            .addOnSuccessListener {
-                Log.d(TAG, "유저 추가 성공")
-            }.addOnFailureListener {
-                Log.d(TAG, "유저 추가 실패")
-            }
     }
 
     private fun startMainActivity() {
