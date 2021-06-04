@@ -47,7 +47,9 @@ class GoalActivity : AppCompatActivity() {
             goalCardAdapter.notifyDataSetChanged()
         }
 
-        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+            goalCardAdapter.notifyDataSetChanged()
+        }
 
         override fun onChildRemoved(snapshot: DataSnapshot) {}
 
