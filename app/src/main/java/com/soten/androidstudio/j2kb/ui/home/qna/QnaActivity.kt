@@ -43,6 +43,7 @@ class QnaActivity : AppCompatActivity() {
                 chatList.add(chatItem)
                 chatAdapter.submitList(chatList)
                 chatAdapter.notifyDataSetChanged()
+                recyclerView.scrollToPosition(chatAdapter.itemCount - 1)
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -79,8 +80,6 @@ class QnaActivity : AppCompatActivity() {
                     val des = it.children.last().child("description").value.toString()
                     val sendTime = it.children.last().child("time").value.toString()
 
-                    Log.d(TAG, "성공 2 $sendTime  ${TimeFormat.sendTime()}")
-                    Log.d(TAG, "성공 2 ${sendTime == TimeFormat.sendTime()}")
                     if (text == auth.currentUser?.uid.orEmpty() && sendTime == TimeFormat.sendTime()) {
                         chatDb.child("Chat")
                             .child(it.children.last().key.toString())
