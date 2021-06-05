@@ -19,6 +19,7 @@ import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.model.chat.ChatItem
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS
+import com.soten.androidstudio.j2kb.utils.TimeFormat
 
 class ChatItemAdapter : ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffUtil) {
 
@@ -33,19 +34,15 @@ class ChatItemAdapter : ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffUt
             currentTime.text = chatItem.time
             message.text = chatItem.description
 
-            Glide.with(thumbnail.context)
-                .load(chatItem.thumbnail)
-                .transform(
-                    CenterCrop(),
-                    RoundedCorners(dpToPx(thumbnail.context, CORNERS_DP))
-                )
-                .into(thumbnail)
             val store = Firebase.firestore
             val auth = Firebase.auth
             store.collection(DB_USERS)
                 .document(auth.currentUser?.uid.orEmpty())
                 .get()
                 .addOnSuccessListener {
+//                    if (chatItem.id == auth.currentUser?.uid.orEmpty() && chatItem.time == TimeFormat.sendTime()) {
+//                        return@addOnSuccessListener
+//                    }
                     if (chatItem.id == auth.currentUser?.uid.orEmpty()) {
                         Glide.with(thumbnail.context)
                             .load(it["profileImage"])
@@ -91,10 +88,14 @@ class ChatItemAdapter : ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffUt
         ).toInt()
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<ChatItem>() {
             override fun areContentsTheSame(oldItem: ChatItem, newItem: ChatItem) =
-                oldItem.time == newItem.time
+                oldItem == newItem
 
             override fun areItemsTheSame(oldItem: ChatItem, newItem: ChatItem) =
                 oldItem == newItem
