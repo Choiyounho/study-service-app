@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -36,6 +37,14 @@ class GoalActivity : AppCompatActivity() {
     private lateinit var addCardAdapter: AddCardAdapter
     private lateinit var concatAdapter: ConcatAdapter
 
+    private val recyclerView: RecyclerView by lazy {
+        findViewById(R.id.cardRecyclerView)
+    }
+
+    private val swipeRefreshLayout: SwipeRefreshLayout by lazy {
+        findViewById(R.id.goalSwipeRefreshLayout)
+    }
+
     private val listener = object : ChildEventListener {
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
             val goal = snapshot.getValue(GoalCard::class.java)
@@ -43,13 +52,10 @@ class GoalActivity : AppCompatActivity() {
 
             cardList.add(goal)
             goalCardAdapter.submitList(cardList)
-
             goalCardAdapter.notifyDataSetChanged()
         }
 
-        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-            goalCardAdapter.notifyDataSetChanged()
-        }
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
 
         override fun onChildRemoved(snapshot: DataSnapshot) {}
 
@@ -71,6 +77,7 @@ class GoalActivity : AppCompatActivity() {
         initGoalDb()
         initAddAdapter()
         initRecyclerView()
+        initSwipeRefreshLayout()
     }
 
     private fun initGoalDb() {
@@ -121,7 +128,6 @@ class GoalActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        val recyclerView = findViewById<RecyclerView>(R.id.cardRecyclerView)
         cardList.clear()
 
         goalCardAdapter = GoalCardAdapter()
@@ -133,6 +139,14 @@ class GoalActivity : AppCompatActivity() {
         recyclerView.adapter = concatAdapter
 
         goalDb.addChildEventListener(listener)
+    }
+
+    private fun initSwipeRefreshLayout() {
+        swipeRefreshLayout.setOnRefreshListener {
+            val intent = intent
+            finish()
+            startActivity(intent)
+        }
     }
 
     companion object {

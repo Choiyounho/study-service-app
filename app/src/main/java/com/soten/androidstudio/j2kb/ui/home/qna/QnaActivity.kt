@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
@@ -37,17 +38,7 @@ class QnaActivity : AppCompatActivity() {
             recyclerView.scrollToPosition(chatAdapter.itemCount - 1)
         }
 
-        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-            val chatItem = snapshot.getValue(ChatItem::class.java)
-            chatItem ?: return
-            Log.d(TAG, "이전 이름 : $previousChildName")
-            chatList.removeAt(chatList.size - 1)
-
-            chatList.add(chatItem)
-            chatAdapter.submitList(chatList)
-            chatAdapter.notifyDataSetChanged()
-            recyclerView.scrollToPosition(chatAdapter.itemCount - 1)
-        }
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
 
         override fun onChildRemoved(snapshot: DataSnapshot) {}
 
@@ -55,7 +46,6 @@ class QnaActivity : AppCompatActivity() {
 
         override fun onCancelled(error: DatabaseError) {}
     }
-    //
 
     val recyclerView:RecyclerView by lazy {
         findViewById(R.id.qnaRecyclerView)
@@ -80,6 +70,10 @@ class QnaActivity : AppCompatActivity() {
     private fun initSendButton(chatDescription: EditText) {
         val sendButton = findViewById<ImageView>(R.id.sendButton)
         sendButton.setOnClickListener {
+            if (chatDescription.text.toString() == "") {
+                return@setOnClickListener
+            }
+            
             chatDb.child("Chat")
                 .limitToLast(1)
                 .get() // Chat db에서 마지막 요소를 가지고 옴
@@ -94,7 +88,6 @@ class QnaActivity : AppCompatActivity() {
                             .child(it.children.last().key.toString())
                             .child("description")
                             .setValue("$des \n${chatDescription.text}")
-    //                        chatAdapter.notifyDataSetChanged()
                     } else {
                         val chatItem = ChatItem(
                             id = auth.currentUser?.uid.orEmpty(),
@@ -104,10 +97,8 @@ class QnaActivity : AppCompatActivity() {
                         chatDb.child("Chat")
                             .child(TimeFormat.createdTimeForId())
                             .setValue(chatItem)
-    //                        chatAdapter.notifyDataSetChanged()
                     }
                     chatDescription.text.clear()
-    //                    chatAdapter.notifyDataSetChanged()
                 }.addOnFailureListener {
                     Log.d(TAG, "실패")
                 }

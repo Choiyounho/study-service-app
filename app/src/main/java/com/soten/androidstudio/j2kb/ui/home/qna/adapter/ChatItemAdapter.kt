@@ -19,7 +19,6 @@ import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.model.chat.ChatItem
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS
-import com.soten.androidstudio.j2kb.utils.TimeFormat
 
 class ChatItemAdapter : ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffUtil) {
 
@@ -40,9 +39,6 @@ class ChatItemAdapter : ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffUt
                 .document(auth.currentUser?.uid.orEmpty())
                 .get()
                 .addOnSuccessListener {
-//                    if (chatItem.id == auth.currentUser?.uid.orEmpty() && chatItem.time == TimeFormat.sendTime()) {
-//                        return@addOnSuccessListener
-//                    }
                     if (chatItem.id == auth.currentUser?.uid.orEmpty()) {
                         Glide.with(thumbnail.context)
                             .load(it["profileImage"])
