@@ -2,15 +2,12 @@ package com.soten.androidstudio.j2kb.ui.home.goal
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.EditText
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -19,7 +16,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.soten.androidstudio.j2kb.R
+import com.soten.androidstudio.j2kb.databinding.ActivityGoalBinding
+import com.soten.androidstudio.j2kb.databinding.DialogBinding
 import com.soten.androidstudio.j2kb.model.goal.GoalCard
 import com.soten.androidstudio.j2kb.ui.home.goal.adapter.AddCardAdapter
 import com.soten.androidstudio.j2kb.ui.home.goal.adapter.GoalCardAdapter
@@ -33,17 +31,12 @@ import java.util.*
 
 class GoalActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityGoalBinding
+    private lateinit var dialogBinding: DialogBinding
+
     private lateinit var goalCardAdapter: GoalCardAdapter
     private lateinit var addCardAdapter: AddCardAdapter
     private lateinit var concatAdapter: ConcatAdapter
-
-    private val recyclerView: RecyclerView by lazy {
-        findViewById(R.id.cardRecyclerView)
-    }
-
-    private val swipeRefreshLayout: SwipeRefreshLayout by lazy {
-        findViewById(R.id.goalSwipeRefreshLayout)
-    }
 
     private val listener = object : ChildEventListener {
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
@@ -72,7 +65,9 @@ class GoalActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_goal)
+        binding = ActivityGoalBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         initGoalDb()
         initAddAdapter()
@@ -104,16 +99,16 @@ class GoalActivity : AppCompatActivity() {
                     Log.d(TAG, "name $name")
                 }
 
-            val dialogView = View.inflate(this, R.layout.dialog, null)
+            dialogBinding = DialogBinding.inflate(LayoutInflater.from(applicationContext))
             val dialog = AlertDialog.Builder(this)
 
-            dialog.setTitle(DIALOG_TITLE)
-                .setView(dialogView)
+            dialog.setView(dialogBinding.root)
+                .setTitle(DIALOG_TITLE)
                 .setPositiveButton(
                     DIALOG_POSITIVE
                 ) { _, _ ->
-                    firstGoal = dialogView.findViewById<EditText>(R.id.f).text.toString()
-                    secondGoal = dialogView.findViewById<EditText>(R.id.s).text.toString()
+                    firstGoal = dialogBinding.f.text.toString()
+                    secondGoal = dialogBinding.s.text.toString()
                     val card = GoalCard(
                         id = auth.currentUser?.uid.orEmpty(),
                         firstGoal = firstGoal,
@@ -133,16 +128,16 @@ class GoalActivity : AppCompatActivity() {
         goalCardAdapter = GoalCardAdapter()
 
         val layoutManager = LinearLayoutManager(this)
-        layoutManager.stackFromEnd= true
-        recyclerView.layoutManager = layoutManager
+        layoutManager.stackFromEnd = true
+        binding.cardRecyclerView.layoutManager = layoutManager
         concatAdapter = ConcatAdapter(goalCardAdapter, addCardAdapter)
-        recyclerView.adapter = concatAdapter
+        binding.cardRecyclerView.adapter = concatAdapter
 
         goalDb.addChildEventListener(listener)
     }
 
     private fun initSwipeRefreshLayout() {
-        swipeRefreshLayout.setOnRefreshListener {
+        binding.goalSwipeRefreshLayout.setOnRefreshListener {
             val intent = intent
             finish()
             startActivity(intent)
