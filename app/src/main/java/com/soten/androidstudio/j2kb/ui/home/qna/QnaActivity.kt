@@ -1,11 +1,9 @@
 package com.soten.androidstudio.j2kb.ui.home.qna
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
-import android.widget.ImageView
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
@@ -15,12 +13,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.R
+import com.soten.androidstudio.j2kb.databinding.ActivityQnaBinding
 import com.soten.androidstudio.j2kb.model.chat.ChatItem
 import com.soten.androidstudio.j2kb.ui.home.qna.adapter.ChatItemAdapter
 import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 import com.soten.androidstudio.j2kb.utils.TimeFormat
 
 class QnaActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityQnaBinding
 
     private val chatDb = Firebase.database.reference
     private val auth = Firebase.auth
@@ -38,7 +39,16 @@ class QnaActivity : AppCompatActivity() {
             recyclerView.scrollToPosition(chatAdapter.itemCount - 1)
         }
 
-        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+            val chatItem = snapshot.getValue(ChatItem::class.java)
+            chatItem ?: return
+            chatList.removeAt(chatList.size - 1)
+
+            chatList.add(chatItem)
+            chatAdapter.submitList(chatList)
+            chatAdapter.notifyDataSetChanged()
+            recyclerView.scrollToPosition(chatAdapter.itemCount - 1)
+        }
 
         override fun onChildRemoved(snapshot: DataSnapshot) {}
 
@@ -53,24 +63,25 @@ class QnaActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_qna)
+        binding = ActivityQnaBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        recyclerView.adapter = chatAdapter
+        val chatLayoutManager = LinearLayoutManager(this)
+        chatLayoutManager.stackFromEnd = true
 
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.stackFromEnd = true
-        recyclerView.layoutManager = layoutManager
+        binding.qnaRecyclerView.apply {
+            adapter = chatAdapter
+            layoutManager = chatLayoutManager
+        }
 
-        val chatDescription = findViewById<EditText>(R.id.messageEditText)
-        initSendButton(chatDescription)
+        initSendButton(binding.messageEditText)
 
         chatDb.child("Chat").addChildEventListener(listener)
     }
 
     private fun initSendButton(chatDescription: EditText) {
-        val sendButton = findViewById<ImageView>(R.id.sendButton)
-        sendButton.setOnClickListener {
-            if (chatDescription.text.toString() == "") {
+        binding.sendButton.setOnClickListener {
+            if (chatDescription.text.isEmpty()) {
                 return@setOnClickListener
             }
             
