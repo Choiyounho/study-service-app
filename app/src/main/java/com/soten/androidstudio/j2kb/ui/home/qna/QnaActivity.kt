@@ -36,18 +36,18 @@ class QnaActivity : AppCompatActivity() {
             chatList.add(chatItem)
             chatAdapter.submitList(chatList)
             chatAdapter.notifyDataSetChanged()
-            recyclerView.scrollToPosition(chatAdapter.itemCount - 1)
+            binding.qnaRecyclerView.scrollToPosition(chatAdapter.itemCount - 1)
         }
 
         override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
             val chatItem = snapshot.getValue(ChatItem::class.java)
             chatItem ?: return
-            chatList.removeAt(chatList.size - 1)
 
+            chatList.removeAt(chatList.size - 1)
             chatList.add(chatItem)
             chatAdapter.submitList(chatList)
             chatAdapter.notifyDataSetChanged()
-            recyclerView.scrollToPosition(chatAdapter.itemCount - 1)
+            binding.qnaRecyclerView.scrollToPosition(chatAdapter.itemCount - 1)
         }
 
         override fun onChildRemoved(snapshot: DataSnapshot) {}
@@ -55,10 +55,6 @@ class QnaActivity : AppCompatActivity() {
         override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
 
         override fun onCancelled(error: DatabaseError) {}
-    }
-
-    val recyclerView:RecyclerView by lazy {
-        findViewById(R.id.qnaRecyclerView)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
