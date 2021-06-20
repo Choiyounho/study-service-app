@@ -1,37 +1,38 @@
 package com.soten.androidstudio.j2kb.ui.home.notice.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.soten.androidstudio.j2kb.R
+import com.soten.androidstudio.j2kb.databinding.ItemNoticeViewBinding
 import com.soten.androidstudio.j2kb.model.post.Notice
 
-class NoticeAdapter(val onItemClicked: (Notice) -> Unit) : ListAdapter<Notice, NoticeAdapter.ViewHolder>(diffUtil) {
+class NoticeAdapter(val onItemClicked: (Notice) -> Unit) :
+    ListAdapter<Notice, NoticeAdapter.ViewHolder>(diffUtil) {
 
-    inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(private val binding: ItemNoticeViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notice: Notice) {
-            val title = view.findViewById<TextView>(R.id.noticeTitleTextView)
-            val time = view.findViewById<TextView>(R.id.createdTimeForNoticeTextView)
-            val name = view.findViewById<TextView>(R.id.writerNameTextView)
+            binding.noticeTitleTextView.text = notice.title
+            binding.createdTimeForNoticeTextView.text = notice.createdTime
+            binding.writerNameTextView.text = notice.nickname
 
-            title.text = notice.title
-            time.text = notice.createdTime
-            name.text = notice.nickname
-
-            view.rootView.setOnClickListener {
+            binding.root.setOnClickListener {
                 onItemClicked(notice)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(inflater.inflate(R.layout.item_notice_view, parent, false))
+        return ViewHolder(
+            ItemNoticeViewBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -47,5 +48,6 @@ class NoticeAdapter(val onItemClicked: (Notice) -> Unit) : ListAdapter<Notice, N
                 oldItem == newItem
         }
     }
+
 }
 

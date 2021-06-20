@@ -13,7 +13,6 @@ class GoalCardAdapter : ListAdapter<GoalCard, GoalCardAdapter.ViewHolder>(diffUt
     inner class ViewHolder(private val binding: ItemGoalCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(card: GoalCard) {
-
             binding.nameTextView.text = card.name
             binding.firstGoalTextView.text = card.firstGoal
             binding.secondGoalTextView.text = card.secondGoal
