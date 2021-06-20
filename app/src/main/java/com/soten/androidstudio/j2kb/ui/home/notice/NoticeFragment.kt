@@ -132,8 +132,8 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
     companion object {
         private const val TOAST_EXIST_PERMISSION = "작성 권한 없음"
 
-        private const val NOTICE_TITLE = "title"
-        private const val NOTICE_DESCRIPTION = "description"
+        const val NOTICE_TITLE = "title"
+        const val NOTICE_DESCRIPTION = "description"
     }
 
 }

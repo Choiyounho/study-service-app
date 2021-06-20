@@ -4,17 +4,19 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.soten.androidstudio.j2kb.R
+import com.soten.androidstudio.j2kb.databinding.ActivityNoticeReadBinding
 
 class NoticeReadActivity : AppCompatActivity() {
 
+    private var _binding: ActivityNoticeReadBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notice_read)
+        _binding = ActivityNoticeReadBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val title = findViewById<TextView>(R.id.readTitleTextView)
-        val description = findViewById<TextView>(R.id.readDescriptionTextView)
-
-        title.text = intent.getStringExtra("title")
-        description.text = intent.getStringExtra("description")
+        binding.readTitleTextView.text = intent.getStringExtra(NoticeFragment.NOTICE_TITLE)
+        binding.readDescriptionTextView.text = intent.getStringExtra(NoticeFragment.NOTICE_DESCRIPTION)
     }
 }
