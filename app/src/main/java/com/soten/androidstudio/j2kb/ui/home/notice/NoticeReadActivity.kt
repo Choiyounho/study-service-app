@@ -1,9 +1,7 @@
 package com.soten.androidstudio.j2kb.ui.home.notice
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.soten.androidstudio.j2kb.R
 import com.soten.androidstudio.j2kb.databinding.ActivityNoticeReadBinding
 
 class NoticeReadActivity : AppCompatActivity() {
