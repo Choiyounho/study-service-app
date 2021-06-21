@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             .document(auth.currentUser?.uid.orEmpty())
             .get()
             .addOnSuccessListener { result ->
-                Log.d(TAG, "뭐야 " + auth.currentUser?.uid.orEmpty())
                 val myGrade = result?.get(DB_USER_GRADE)
                 val restrictGrade = Role.NORMAL.toString()
                 if (myGrade == restrictGrade || myGrade == null) {
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
             }.addOnFailureListener {
-                Log.d(TAG, "뭘까")
                 Toast.makeText(this, "회원 인증 후 이용 하세요", Toast.LENGTH_SHORT).show()
                 finish()
             }

@@ -41,7 +41,7 @@ class ChatItemAdapter : ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffUt
                 .addOnSuccessListener {
                     if (chatItem.id == auth.currentUser?.uid.orEmpty()) {
                         Glide.with(thumbnail.context)
-                            .load(it["profileImage"])
+                            .load(it[DB_PROFILE_IMAGE])
                             .transform(
                                 CenterCrop(),
                                 RoundedCorners(dpToPx(thumbnail.context, CORNERS_DP))
@@ -54,7 +54,7 @@ class ChatItemAdapter : ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffUt
                             .get()
                             .addOnSuccessListener { another ->
                                 Glide.with(thumbnail.context)
-                                    .load(another["profileImage"])
+                                    .load(another[DB_PROFILE_IMAGE])
                                     .transform(
                                         CenterCrop(),
                                         RoundedCorners(dpToPx(thumbnail.context, CORNERS_DP))
@@ -98,5 +98,6 @@ class ChatItemAdapter : ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffUt
         }
 
         private const val CORNERS_DP = 12
+        private const val DB_PROFILE_IMAGE = "profileImage"
     }
 }
