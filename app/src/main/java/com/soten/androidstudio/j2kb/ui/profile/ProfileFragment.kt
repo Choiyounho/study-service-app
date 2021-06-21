@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -24,10 +23,13 @@ import com.google.firebase.storage.ktx.storage
 import com.soten.androidstudio.j2kb.LoginActivity
 import com.soten.androidstudio.j2kb.MainActivity
 import com.soten.androidstudio.j2kb.R
-import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
+import com.soten.androidstudio.j2kb.databinding.FragmentProfileBinding
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
+
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
 
     private var selectedUri: Uri? = null
 
@@ -46,7 +48,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         initProfileImageView()
         initLogoutButton()
 
-        val button = view.findViewById<Button>(R.id.submitButton)
+        val button = binding.submitButton
         button.setOnClickListener {
             if (selectedUri != null) {
                 val photoUri = selectedUri ?: return@setOnClickListener
@@ -70,13 +72,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun initNicknameTextView() {
-        val nickname: TextView = view?.findViewById(R.id.profileNameTextView) as TextView
-        nickname.text = auth.currentUser?.displayName
+        binding.profileNameTextView.text = auth.currentUser?.displayName
     }
 
     private fun initLogoutButton() {
-        val logout: Button = view?.findViewById(R.id.logoutButton) as Button
-        logout.setOnClickListener {
+        binding.logoutButton.setOnClickListener {
             auth.signOut()
             val intent = Intent(activity as MainActivity, LoginActivity::class.java)
             startActivity(intent)
@@ -103,17 +103,16 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun initProfileImageView() {
-        val profile: ImageView = view?.findViewById(R.id.image_profile) as ImageView
         store.collection(DB_USERS)
             .document(auth.currentUser?.uid.orEmpty())
             .get()
             .addOnSuccessListener {
-                Glide.with(profile.context)
+                Glide.with(binding.imageProfile.context)
                     .load(it["profileImage"].toString())
-                    .into(profile)
+                    .into(binding.imageProfile)
             }
 
-        profile.setOnClickListener {
+        binding.imageProfile.setOnClickListener {
             when {
                 context?.let { it1 ->
                     ContextCompat.checkSelfPermission(
@@ -182,7 +181,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             2020 -> {
                 val uri = data?.data
                 if (uri != null) {
-                    view?.findViewById<ImageView>(R.id.image_profile)?.setImageURI(uri)
+                    binding.imageProfile.setImageURI(uri)
                     selectedUri = uri
                 } else {
                     Toast.makeText(context, "사진을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()

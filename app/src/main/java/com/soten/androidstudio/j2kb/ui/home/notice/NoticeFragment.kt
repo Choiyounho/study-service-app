@@ -5,11 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ChildEventListener
@@ -21,16 +19,20 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.soten.androidstudio.j2kb.R
+import com.soten.androidstudio.j2kb.databinding.FragmentNoticeBinding
 import com.soten.androidstudio.j2kb.model.post.Notice
 import com.soten.androidstudio.j2kb.model.user.Role
 import com.soten.androidstudio.j2kb.ui.home.notice.adapter.NoticeAdapter
 import com.soten.androidstudio.j2kb.ui.home.notice.post.NoticePostActivity
 import com.soten.androidstudio.j2kb.utils.CommonsConstant.Companion.TAG
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_NOTICE
-import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USER_GRADE
 import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USERS
+import com.soten.androidstudio.j2kb.utils.DBKey.Companion.DB_USER_GRADE
 
 class NoticeFragment : Fragment(R.layout.fragment_notice) {
+
+    private var _binding: FragmentNoticeBinding? = null
+    private val binding get() = _binding!!
 
     private val store = Firebase.firestore
     private val auth: FirebaseAuth by lazy {
@@ -49,7 +51,6 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
 
             noticeList.add(post)
             noticeAdapter.submitList(noticeList)
-
             noticeAdapter.notifyDataSetChanged()
         }
 
@@ -65,6 +66,9 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val fragmentNoticeBinding = FragmentNoticeBinding.bind(view)
+        _binding = fragmentNoticeBinding
+
         noticeList.clear()
         noticeDb = Firebase.database.reference.child(DB_NOTICE)
 
@@ -76,22 +80,23 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
     }
 
     private fun initRecyclerView() {
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.notice_container)
         noticeAdapter = NoticeAdapter(onItemClicked = { noticePost ->
             context?.let {
                 val intent = Intent(it, NoticeReadActivity::class.java)
-                intent.putExtra("title", noticePost.title)
-                intent.putExtra("description", noticePost.description)
+                intent.putExtra(NOTICE_TITLE, noticePost.title)
+                intent.putExtra(NOTICE_DESCRIPTION, noticePost.description)
                 startActivity(intent)
             }
         })
 
-        recyclerView?.layoutManager = LinearLayoutManager(context)
-        recyclerView?.adapter = noticeAdapter
+        binding.noticeContainer.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = noticeAdapter
+        }
     }
 
     private fun initWriteButton() {
-        view?.findViewById<ImageView>(R.id.writeButtonFragment)?.setOnClickListener {
+        binding.writeButtonFragment.setOnClickListener {
             context?.let {
                 checkWritePermission(it)
             }
@@ -126,6 +131,9 @@ class NoticeFragment : Fragment(R.layout.fragment_notice) {
 
     companion object {
         private const val TOAST_EXIST_PERMISSION = "작성 권한 없음"
+
+        const val NOTICE_TITLE = "title"
+        const val NOTICE_DESCRIPTION = "description"
     }
 
 }
