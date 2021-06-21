@@ -34,14 +34,12 @@ class SplashActivity : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener { document ->
                     if (!document.exists()) {
-                        Log.d(CommonsConstant.TAG, "유저 있긴한데 이상함")
                         Toast.makeText(this, "회원 가입 페이지로 이동합니다", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
                         val intent = Intent(this, MainActivity::class.java)
-                        Log.d(CommonsConstant.TAG, "유저 있음")
                         Log.d(CommonsConstant.TAG, "document ${document.data}")
                         startActivity(intent)
                         finish()
@@ -49,7 +47,6 @@ class SplashActivity : AppCompatActivity() {
                 }
 
         } ?: run {
-            Log.d(CommonsConstant.TAG, "유저 없음")
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()

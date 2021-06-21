@@ -31,22 +31,22 @@ class WeekGoalFragment : Fragment(R.layout.fragment_week_goal) {
     private fun initTwelfthTextView(twelve: TextView) {
         twelve.setOnClickListener {
             if (TimeFormat.currentTime() >= 21061212) {
-                Toast.makeText(context, "열람 가능", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, TOAST_POSSIBLE, Toast.LENGTH_SHORT).show()
                 startGoalActivity(12)
                 return@setOnClickListener
             }
-            Toast.makeText(context, "열람 가능 기간이 아닙니다", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, TOAST_IMPOSSIBLE, Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun initThirteenthTextView(thirteenth: TextView) {
         thirteenth.setOnClickListener {
             if (TimeFormat.currentTime() >= 21061912) {
-                Toast.makeText(context, "열람 가능", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, TOAST_POSSIBLE, Toast.LENGTH_SHORT).show()
                 startGoalActivity(13)
                 return@setOnClickListener
             }
-            Toast.makeText(context, "열람 가능 기간이 아닙니다", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, TOAST_IMPOSSIBLE, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -54,6 +54,11 @@ class WeekGoalFragment : Fragment(R.layout.fragment_week_goal) {
         val intent = Intent(context, GoalActivity::class.java)
         intent.putExtra(INTENT_WEEK, weekTh)
         startActivity(intent)
+    }
+
+    companion object {
+        private const val TOAST_POSSIBLE = "열람 가능"
+        private const val TOAST_IMPOSSIBLE = "열람 가능"
     }
 
 }

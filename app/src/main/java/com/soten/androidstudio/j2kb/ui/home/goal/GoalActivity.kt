@@ -87,7 +87,7 @@ class GoalActivity : AppCompatActivity() {
 
         addCardAdapter = AddCardAdapter(onItemClicked = {
             if (!GoalWriteTerms.terms()) {
-                Toast.makeText(this, "목표 설정 기간이 아닙니다", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, TOAST_FAIL, Toast.LENGTH_SHORT).show()
                 return@AddCardAdapter
             }
 
@@ -150,6 +150,7 @@ class GoalActivity : AppCompatActivity() {
         private const val DIALOG_NEGATIVE = "취소"
 
         private const val TOAST_MESSAGE = "등록 완료"
+        private const val TOAST_FAIL = "목표 설정 기간이 아닙니다"
     }
 
 }
